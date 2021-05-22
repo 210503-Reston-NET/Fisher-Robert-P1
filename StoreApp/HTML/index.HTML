@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--This ^ declares this particular document to be of the html format-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" conten="IE=edge">
+    <meta name="Viewport" content="width=device-width, initial-scale=1.0">
+</head>
+    <body>
+        <h1 class="jumbotron">Lecture on HTML, CSS, Bootstrap</h1>
+        <div class="containter">
+            <h1>HTML</h1>
+            <div class="Container">
+                This is a div tag
+            </div>
+            <div class="container">
+                It's a generic block element
+            </div>
+            <div class="container">
+                This means that, it takes vertical space
+            </div>
+            <div class="container">
+                It's width is as wide as your Viewport
+            </div>
+            <div class="container">
+                <span>
+                    This is a span, a generic inline element 
+                </span>
+                <span>
+                    It doesn't take vertical space, It exists side by side with other elements as long as there is space
+                </span>
+            </div>
+            <div class="container">
+                <p>
+                    This is a paragraph tag, also a block element IE it takes up vertical space
+                </p>
+                <article>
+                    This is an article, the semantic counterpart of a p tag, takes less vertical space
+                </article>
+            </div>
+            <div class="container">
+                <a href="http://www.Google.com" target="_blank">This is a Quick Link to our page to be</a>
+            </div>
+            <div class="container">
+                <h3>Difference between head, header, heading</h3>
+                <p>The head tag, encapsulates meta information about your html resource</p>
+                <header>The header is a semantic element that describes a header. </header>
+                <p>The heading is a way of formating how things are presented, like a paragraph heading. It has levels.</p>
+                <h1>Level 1</h1>
+                <h2>Level 2</h2>
+                <h3>Level 3</h3>
+                <h4>Level 4</h4>
+                <h5>Level 6</h5>
+                <h6>Level 6</h6>
+                <p>Why even use header element</p>
+                <p>
+                    We don't use tags to make words appear <b>bolder</b> or <i>italicized</i> anymore. HTML shouldnt describe how they look, 
+                    it should only describe how they are. Its the job of CSS to worry about styling.
+                </p>
+                <div class="container">
+                    <h3>Presenmeting a collection of stuff</h3>
+                    <div class="container">
+                        <h4>Lists</h4>
+                        <ol>
+                            <li>This is an ordered list</li>
+                            <li>notice the numbers</li>
+                        </ol>
+                        <ul>
+                            <li>This is an unordered list</li>
+                            <li>Noticed lack of numbers</li>
+                        </ul>
+                        <div class="container">
+                            <h4>Tables</h4>
+                            <table>
+                                <thead>
+                                    <th>Name</th>
+                                    <th>Favorite Color</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Marielle</td>
+                                        <td style="color:green">Green</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jacob</td>
+                                        <td style="color:blue">Blue</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Azhya</td>
+                                        <td style="color:red">Red</td>
+                                        <td style="color:purple">Purple</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <h2>Attributes</h2>
+                    <p class="attributes">
+                        Some tags, like you img tag use attributes to define the value of what they're presenting
+                        (img src="Where the image is/image address")
+                        <br/>
+                        the href attribute of the anchor tag, tells you where the anchor leads
+                        <br/>
+                        You can also use certain attributes to identifty your elements
+                        <ul>
+                            <caption>2 common ways to identify an element via attributes</caption>
+                            <li>ID- unique way to identify an element</li>
+                            <li>Class - A way to identify a group of elements belonging to a class</li>
+                        </ul>
+                        You need identification to be able to know where to apply certain CSS styling rules, as well as behavior
+                        in JS. Then again, you can also use the style attribute, to apply style to your elements.
+                        <p style="color:brown">Using the style attribute, i've changed the color of the font, however only for this text</p>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="containter">
+            <h1>
+                CSS
+            </h1>
+        </div>
+        <div class="containter">
+            <h1>Bootstrap</h1>
+        </div>
+    </body>
+
+</html>

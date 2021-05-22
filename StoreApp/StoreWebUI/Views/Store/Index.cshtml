@@ -1,0 +1,46 @@
+﻿@model IEnumerable<StoreWebUI.Models.StoreVM>
+
+@{
+    ViewData["Title"] = "Store";
+}
+
+<h1>Store</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr><th>
+                @Html.DisplayNameFor(model => model.StoreID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreState)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreState)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.StoreID })  |
+                <a asp-action="Details" asp-route-id="@item.StoreID">Details</a> |
+                @Html.ActionLink("Delete", "Delete", new { id = item.StoreID }) |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
