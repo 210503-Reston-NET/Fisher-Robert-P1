@@ -40,3 +40,10 @@ steps:
     zipAfterPublish: true
     projects: '**/StoreApp/StoreWebUI/*.csproj'
   
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(c9d4b655-c981-4696-93d6-bc06f9189051)'
+    appType: 'webApp'
+    WebAppName: 'BearlyCamping'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
