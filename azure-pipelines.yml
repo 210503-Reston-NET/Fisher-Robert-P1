@@ -9,7 +9,7 @@ trigger:
 pool: Default
 
 variables:
-  solution: '**/Fisher-Robert-P1/StoreApp/*.sln'
+  solution: '**/Fisher-Robert-P1/StoreApp/StoreApp.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
