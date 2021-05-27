@@ -39,6 +39,11 @@ steps:
   inputs:
     command: 'test'
     projects: '**/Fisher-Robert-P1/StoreApp/StoreTest/*.csproj'
+    arguments: --configuration $(buildConfiguration) --collect "Code Coverage
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '**/Cobertura/Configure.xml'
 - task: SonarCloudAnalyze@1
   displayName: Run Code Analysis
 - task: SonarCloudPublish@1
