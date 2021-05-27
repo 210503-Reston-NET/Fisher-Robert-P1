@@ -9,7 +9,7 @@ trigger:
 pool: Default
 
 variables:
-  solution: '**Fisher-Robert-P1/StoreApp/*.sln'
+  solution: '**/Fisher-Robert-P1/StoreApp/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -31,4 +31,4 @@ steps:
   displayName: Test Project Solution
   inputs:
     command: 'test'
-    projects: '**Fisher-Robert-P1/StoreApp/StoreTest/*.csproj'
+    projects: '**/Fisher-Robert-P1/StoreApp/StoreTest/*.csproj'
