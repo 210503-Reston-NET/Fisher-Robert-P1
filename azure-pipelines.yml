@@ -18,14 +18,14 @@ steps:
   displayName: Restore Project deps
   inputs:
     command: 'restore'
-    projects: '$(solution)'
+    projects: $(solution)
     feedsToUse: 'select'
 
 - task: DotNetCoreCLI@2
   displayName: Build Project Solution
   inputs:
     command: 'build'
-    projects: '$(solution)'
+    projects: $(solution)
 
 - task: DotNetCoreCLI@2
   displayName: Test Project Solution
