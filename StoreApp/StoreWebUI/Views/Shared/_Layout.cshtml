@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - StoreWebUI</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    @using Microsoft.AspNetCore.Http
 </head>
 <body>
     <header>
@@ -24,6 +25,16 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @if (Context.Session.GetString("EmployeeID") != "000" || Context.Session.GetString("EmployeeID") != "null" || Context.Session.GetString("EmployeeID") != "")
+                        {
+                            <li class="nav-item text-dark">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="" , asp-action="">Manager Menu</a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Products</a>
+                        </li>
+
                     </ul>
                 </div>
             </div>

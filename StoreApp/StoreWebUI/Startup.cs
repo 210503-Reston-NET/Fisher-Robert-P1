@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using StoreDL;
 using StoreBL;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace StoreWebUI
 {
@@ -30,6 +31,18 @@ namespace StoreWebUI
             services.AddDbContext<BearlyCampingDataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("BearlyCampingDB")));
             services.AddScoped<DAO, RepoDB>();
             services.AddScoped<StoreBLInterface, StoreBussinessLayer>();
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => false;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+             }
+                );
+            services.AddSession(ses =>
+            {
+                ses.IdleTimeout = TimeSpan.FromMinutes(15);
+                ses.Cookie.HttpOnly = true;
+            }
+             );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +64,7 @@ namespace StoreWebUI
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

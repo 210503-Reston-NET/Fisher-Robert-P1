@@ -20,6 +20,10 @@ namespace StoreBL
         {
             return _repoDB.AddProduct(product);
         }
+        public bool AddInventoryItem(Inventory item)
+        {
+            return _repoDB.AddInventoryItem(item);
+        }
         public Order AddOrder(Order order)
         {
             return _repoDB.AddOrder(order);
@@ -145,6 +149,11 @@ namespace StoreBL
         public bool UpdateStore(Store store)
         {
             return _repoDB.UpdateStore(store);
+        }
+
+        public bool RemoveInventoryItem(Inventory item)
+        {
+            return _repoDB.RemoveInventoryItem(item);
         }
     }
 }

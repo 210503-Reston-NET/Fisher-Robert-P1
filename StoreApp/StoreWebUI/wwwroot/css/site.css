@@ -69,3 +69,12 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.emphasis {
+    background-color: darkgray;
+    fill-opacity: 50;
+}
+
+table, th, td {
+    border: 1px solid black;
+}

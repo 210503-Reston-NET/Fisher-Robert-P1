@@ -37,7 +37,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.StoreID })  |
-                <a asp-action="Details" asp-route-id="@item.StoreID">Details</a> |
+                @Html.ActionLink("Inventory", "Index", "Inventory", new { id = item.StoreID }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.StoreID }) |
             </td>
         </tr>

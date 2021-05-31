@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/c9d4b655-c981-4696-93d6-bc06f9189051/resourceGroups/2103-Net-Marielle/providers/Microsoft.Web/sites/BearlyCamping",
+    "appService.deploySubpath": "StoreApp/StoreWebUI/publish"
+}

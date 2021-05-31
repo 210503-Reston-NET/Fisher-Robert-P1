@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StoreWebUI.Models;
+using StoreModels;
+using StoreBL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +12,11 @@ namespace StoreWebUI.Controllers
 {
     public class UserController : Controller
     {
+        StoreBLInterface _BL;
+        public UserController(StoreBLInterface bussinessLayer)
+        {
+            _BL = bussinessLayer;
+        }
         // GET: UserController
         public ActionResult Index()
         {
@@ -30,16 +38,22 @@ namespace StoreWebUI.Controllers
         // POST: UserController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(UserVM VM)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                
+                User user = new User(VM.UserName, VM.Password, VM.FirstName, VM.LastName, VM.Code);
+                foreach (User account in _BL.GetAllUsers())
+                    if (account == user)
+                        return View();
+                _BL.AddUser(user);
+                return Redirect("../Home/Index");
             }
             catch
             {
                 return View();
-            }
+            }   
         }
 
         // GET: UserController/Edit/5
