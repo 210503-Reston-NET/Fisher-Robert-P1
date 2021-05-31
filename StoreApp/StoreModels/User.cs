@@ -4,7 +4,7 @@ namespace StoreModels
 {
     public class User
     {
-        public string Code { get;  set; }
+        public string Code { get; set; } = "000";
         public string UserName { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }

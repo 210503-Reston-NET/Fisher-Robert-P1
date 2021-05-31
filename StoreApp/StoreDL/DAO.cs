@@ -31,6 +31,8 @@ namespace StoreDL
         bool UpdateInventory(Inventory inventory);
         bool UpdateStore(Store store);
         bool AddTransaction(Transaction transact);
-        public bool RemoveStore(Store store);
+        bool RemoveStore(Store store);
+        bool AddInventoryItem(Inventory item);
+        bool RemoveInventoryItem(Inventory item);
     }
 }

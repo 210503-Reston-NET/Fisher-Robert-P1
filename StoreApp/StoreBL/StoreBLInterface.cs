@@ -29,5 +29,7 @@ namespace StoreBL
         List<Order> GetAllOrders(User user);
         List<Inventory> GetInventoryFor(int storeID);
         List<Transaction> GetTransactions(int OrderNumber);
+        bool AddInventoryItem(Inventory item);
+        bool RemoveInventoryItem(Inventory item);
     }
 }

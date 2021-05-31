@@ -448,5 +448,33 @@ namespace StoreDL
                 return false;
             }
         }
+
+        public bool AddInventoryItem(Inventory item)
+        {
+            try
+            {
+                _context.Inventories.Add(item);
+                _context.SaveChanges();
+                return true;
+            } catch (Exception e)
+            {
+                Log.Error(e.Message, "Failed to add item ISBN: " + item.ISBN + " to store ID: " + item.StoreID);
+                return false;
+            }
+        }
+
+        public bool RemoveInventoryItem(Inventory item)
+        {
+            try
+            {
+                _context.Inventories.Remove(item);
+                _context.SaveChanges();
+                return true;
+            } catch (Exception e)
+            {
+                Log.Error(e.Message, "Failed to remove item ISBN: " + item.ISBN + " from store ID: " + item.StoreID);
+                return false;
+            }
+        }
     }
 }

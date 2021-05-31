@@ -1,0 +1,42 @@
+﻿@model StoreWebUI.Models.InventoryVM
+
+@using StoreModels;
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Inventory</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+                <table>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>ISBN</th>
+                        <th>Price</th>
+                    </tr>
+                    <tbody>
+                        @foreach (StoreModels.Product product in ViewBag.products)
+                        {
+                            <tr>
+                                <td>@product.Name</td>
+                                <td>@product.ISBN</td>
+                                <td>@product.Price</td>
+                            </tr>
+                        }
+                     </tbody>
+                </table>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
