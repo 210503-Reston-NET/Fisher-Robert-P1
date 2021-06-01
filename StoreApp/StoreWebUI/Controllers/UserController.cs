@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace StoreWebUI.Controllers
 {
@@ -19,12 +20,6 @@ namespace StoreWebUI.Controllers
         }
         // GET: UserController
         public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: UserController/Details/5
-        public ActionResult Details(int id)
         {
             return View();
         }
@@ -96,6 +91,33 @@ namespace StoreWebUI.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult LoginPage()
+        {
+            Console.WriteLine(HttpContext.Session.GetString("UserName") + "If Blank there is no user");
+            if (HttpContext.Session.GetString("UserName") == null)
+                return View("../User/LoginPage");
+            return Redirect("../Order/Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LoginPage(UserVM given)
+        {
+            List<User> accounts = _BL.GetAllUsers();
+            if (accounts == null)
+                return View();
+            foreach (User user in accounts)
+            {
+                if (user.UserName == given.UserName && user.Password == given.Password)
+                {
+                    HttpContext.Session.SetString("EmployeeID", JsonConvert.SerializeObject(user.Code));
+                    HttpContext.Session.SetString("UserName", JsonConvert.SerializeObject(user.UserName));
+                    return Redirect("../Order/Index");
+                }
+            }
+            return View();
         }
     }
 }

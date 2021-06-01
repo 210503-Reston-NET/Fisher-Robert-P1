@@ -80,15 +80,6 @@ namespace StoreDL
                 _context.Stores.Add(
                     store
                 );
-                /*
-                foreach(Inventory inventory in store.Inventory)
-                {
-                    Log.Debug("Attempting to persist Inventory: " + inventory + " to database.");
-                    _context.Inventories.Add(
-                        inventory
-                    );
-                }
-                */
                 _context.SaveChanges();
 
                 return true;
@@ -151,13 +142,13 @@ namespace StoreDL
             return users;
         }
 
-        public List<Inventory> getInventory(int StoreID)
+        public List<Inventory> getInventory(int storeID)
         {
             List<Inventory> inventory;
             try{
             Log.Debug("Attempting to retrieve Inventory from the database.");
             inventory = _context.Inventories.Where(
-                store => store.StoreID == StoreID
+                store => store.StoreID == storeID
                 ).Select(
                     Inventory => new Inventory()
                     {
@@ -453,6 +444,7 @@ namespace StoreDL
         {
             try
             {
+                Log.Debug("Attempting to add item with ISBN: " + item.ISBN + " to Store with ID: " + item.StoreID);
                 _context.Inventories.Add(item);
                 _context.SaveChanges();
                 return true;

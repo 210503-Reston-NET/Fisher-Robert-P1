@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using StoreBL;
 using StoreWebUI.Models;
 using StoreModels;
+using Microsoft.Extensions.Logging;
 
 namespace StoreWebUI.Controllers
 {
@@ -14,14 +15,25 @@ namespace StoreWebUI.Controllers
     {
      
         private StoreBLInterface _storeBL;
-        public InventoryController(StoreBLInterface storeBL)
+        private readonly ILogger<HomeController> _logger;
+        public InventoryController(ILogger<HomeController> logger, StoreBLInterface storeBL)
         {
             this._storeBL = storeBL;
+            _logger = logger;
         }
-        // GET: StoreController
+        // GET: StoreController/5
         public ActionResult Index(int id)
         {
-            return View(_storeBL.GetInventoryFor(id)
+            // If id has been sent then set the storeID session to the new id
+            if (id > -1)
+            {
+                HttpContext.Session.SetString("StoreID", id + "");
+                return View(_storeBL.GetInventoryFor(id)
+                    .Select(inventory => new InventoryVM(inventory))
+                    .ToList());
+            }
+            // Otherwise use previous StoreID
+            return View(_storeBL.GetInventoryFor(int.Parse(HttpContext.Session.GetString("StoreID")))
                 .Select(inventory => new InventoryVM(inventory))
                 .ToList());
         }
@@ -42,42 +54,47 @@ namespace StoreWebUI.Controllers
         // POST: InventoryController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(InventoryVM item)
+        public ActionResult Create(string ISBN)
         {
             try
             {
-                    if (ModelState.IsValid)
+                _storeBL.AddInventoryItem(new Inventory
                     {
-                        Console.WriteLine("ModelState Is Valid");
-                    _storeBL.AddInventoryItem(new Inventory
-                    {
-                        ISBN = item.ISBN,
-                        StoreID = item.StoreID,
-                        Quantity = item.Quantity
+                        ISBN = ISBN,
+                        StoreID = int.Parse(HttpContext.Session.GetString("StoreID")),
+                        Quantity = 0
                     });
-                    }
-                return RedirectToAction(nameof(Index));
+
+                return Redirect("Inventory/Index/" + HttpContext.Session.GetString("StoreID"));
             }
-            catch
+            catch (Exception e)
             {
+                _logger.LogError("Failed to create Inventory\n" + e.Message);
                 return View();
             }
         }
 
         // GET: StoreController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, string ISBN)
         {
-            return View(_storeBL.GetStore(id));
+            return View(_storeBL.GetInventory(id, ISBN));
         }
 
         // POST: StoreController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, StoreVM storeVM)
+        public ActionResult Edit(int id, InventoryVM inventoryVM)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                Inventory result = new Inventory()
+                {
+                    ISBN = inventoryVM.ISBN,
+                    StoreID = inventoryVM.StoreID,
+                    Quantity = inventoryVM.Quantity
+                };
+                _storeBL.UpdateInventory(result);
+                return Redirect("/Inventory/Index/" + HttpContext.Session.GetString("StoreID"));
             }
             catch
             {
@@ -86,10 +103,9 @@ namespace StoreWebUI.Controllers
         }
 
         // GET: StoreController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, string ISBN)
         {
-            //return View(new StoreVM(_storeBL.GetStore(id)));
-            return View(_storeBL.GetStore(id));
+            return View(_storeBL.GetInventory(id, ISBN));
         }
 
         // POST: StoreController/Delete/5
@@ -105,7 +121,7 @@ namespace StoreWebUI.Controllers
                     StoreCity = storeVM.StoreCity,
                     StoreState = storeVM.StoreState
                 });
-                return RedirectToAction(nameof(Index));
+                return Redirect("Inventory/Index/" + HttpContext.Session.GetString("StoreID"));
             }
             catch
             {

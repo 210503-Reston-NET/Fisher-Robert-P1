@@ -11,13 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreBL", "StoreBL\StoreBL.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreDL", "StoreDL\StoreDL.csproj", "{2364EE9B-77A2-40B1-AFFB-1AB0960C3EC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreWebUI", "StoreWebUI\StoreWebUI.csproj", "{B6DE9CCF-32B4-4CD5-B124-8EFBB078CA30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreWebUI", "StoreWebUI\StoreWebUI.csproj", "{B6DE9CCF-32B4-4CD5-B124-8EFBB078CA30}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{13EBDD6E-605C-41D0-BF69-964F47A40386}"
 	ProjectSection(SolutionItems) = preProject
-		Index.cshtml = Index.cshtml
 		.dockerignore = .dockerignore
 		dockerfile = dockerfile
+		Index.cshtml = Index.cshtml
 	EndProjectSection
 EndProject
 Global

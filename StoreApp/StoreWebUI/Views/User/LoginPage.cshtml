@@ -1,0 +1,27 @@
+@model StoreModels.User
+@using Microsoft.AspNetCore.Http
+
+@{ ViewData["Title"] = "Home Page"; }
+
+<div class="text-center">
+    <h1>LoginPage</h1>
+    <form asp-action="LoginPage" asp-controller="User">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <label asp-for="UserName" class="control-label"></label>
+        <input asp-for="UserName" id="Username" class="form-control" />
+        <span asp-validation-for="UserName" class="text-danger"></span>
+
+        <label asp-for="Password" class="form-control"></label>
+        <input asp-for="Password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+
+        <div class="form-group">
+            <input type="submit" value="Login" class="btn btn-primary" />
+        </div>
+    </form>
+    <a asp-controller="User" asp-action="Create">Create a new Account</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

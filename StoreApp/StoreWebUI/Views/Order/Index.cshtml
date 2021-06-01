@@ -1,0 +1,39 @@
+﻿@model IEnumerable<StoreModels.Store>
+
+@{
+    ViewData["Title"] = "StoreSelector";
+}
+
+<h1>Choose your local store</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreState)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StoreCity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StoreState)
+                </td>
+                <td>
+                    <form asp-action="StoreSelector">
+                        <button type="submit" asp-action="StoreSelector" asp-route-ID=@item.StoreID>Select</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -5,33 +5,35 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Add Inventory Item</h1>
 
 <h4>Inventory</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-                <table>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>ISBN</th>
-                        <th>Price</th>
-                    </tr>
+        <form asp-action="Create" method="post">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>ISBN</th>
+                            <th>Price</th>
+                            <th></th>
+                        </tr>
+                    </thead>
                     <tbody>
                         @foreach (StoreModels.Product product in ViewBag.products)
                         {
                             <tr>
-                                <td>@product.Name</td>
-                                <td>@product.ISBN</td>
-                                <td>@product.Price</td>
+                                <td><label>@product.Name</label></td>
+                                <td><label>@product.ISBN</label></td>
+                                <td><label>@product.Price</label></td>
+                                <td><button asp-action="Create" asp-route-ISBN=@product.ISBN type="submit">Add to Inventory</button></td>
                             </tr>
+
                         }
-                     </tbody>
+                    </tbody>
                 </table>
         </form>
-    </div>
-</div>
+
 
 <div>
     <a asp-action="Index">Back to List</a>

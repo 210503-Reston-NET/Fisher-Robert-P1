@@ -30,27 +30,6 @@ namespace StoreWebUI.Controllers
         {
             return View();
         }
-        public ActionResult VerifyLogin(UserVM given)
-        {
-            List<User> accounts = _BL.GetAllUsers();
-            if (accounts == null)
-                return View();
-            foreach (User user in accounts)
-            {
-                if (user.UserName == given.UserName && user.Password == given.Password)
-                {
-                    HttpContext.Session.SetString("EmployeeID", JsonConvert.SerializeObject(user.Code));
-                    HttpContext.Session.SetString("UserName", JsonConvert.SerializeObject(user.UserName));
-                    return Redirect("../Home/Index");
-                }
-            }
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
