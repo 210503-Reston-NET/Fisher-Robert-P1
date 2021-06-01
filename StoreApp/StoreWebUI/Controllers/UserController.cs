@@ -95,7 +95,6 @@ namespace StoreWebUI.Controllers
 
         public ActionResult LoginPage()
         {
-            Console.WriteLine(HttpContext.Session.GetString("UserName") + "If Blank there is no user");
             if (HttpContext.Session.GetString("UserName") == null)
                 return View("../User/LoginPage");
             return Redirect("../Order/Index");

@@ -65,7 +65,7 @@ namespace StoreWebUI.Controllers
                         Quantity = 0
                     });
 
-                return Redirect("Inventory/Index/" + HttpContext.Session.GetString("StoreID"));
+                return Redirect("./Index/" + HttpContext.Session.GetString("StoreID"));
             }
             catch (Exception e)
             {

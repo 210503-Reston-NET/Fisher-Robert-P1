@@ -31,5 +31,8 @@ namespace StoreBL
         List<Transaction> GetTransactions(int OrderNumber);
         bool AddInventoryItem(Inventory item);
         bool RemoveInventoryItem(Inventory item);
+        Transaction GetTransaction(int ordernumber, string ISBN);
+        Transaction UpdateTransaction(Transaction trasnact);
+        Order GetOrder(int OrderNumber);
     }
 }

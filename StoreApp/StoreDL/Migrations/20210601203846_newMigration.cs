@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace StoreDL.Migrations
 {
-    public partial class initial : Migration
+    public partial class newMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -70,15 +70,14 @@ namespace StoreDL.Migrations
                 name: "Transactions",
                 columns: table => new
                 {
-                    OrderNumber = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ISBN = table.Column<string>(type: "text", nullable: true),
+                    OrderNumber = table.Column<int>(type: "integer", nullable: false),
+                    ISBN = table.Column<string>(type: "text", nullable: false),
                     Quantity = table.Column<int>(type: "integer", nullable: true),
                     OrderNumber1 = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Transactions", x => x.OrderNumber);
+                    table.PrimaryKey("PK_Transactions", x => new { x.OrderNumber, x.ISBN });
                     table.ForeignKey(
                         name: "FK_Transactions_Orders_OrderNumber1",
                         column: x => x.OrderNumber1,
@@ -91,13 +90,13 @@ namespace StoreDL.Migrations
                 name: "Inventories",
                 columns: table => new
                 {
-                    ISBN = table.Column<string>(type: "text", nullable: false),
                     StoreID = table.Column<int>(type: "integer", nullable: false),
+                    ISBN = table.Column<string>(type: "text", nullable: false),
                     Quantity = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventories", x => x.ISBN);
+                    table.PrimaryKey("PK_Inventories", x => new { x.ISBN, x.StoreID });
                     table.ForeignKey(
                         name: "FK_Inventories_Stores_StoreID",
                         column: x => x.StoreID,

@@ -17,7 +17,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th>Quantity</th>
+            <th>Available</th>
             <th></th>
         </tr>
     </thead>
@@ -35,12 +35,14 @@
                 {
                     if(inv.ISBN == item.ISBN)
                     {
-                        @inv.Quantity;
+                        @Html.DisplayFor(modelItem => inv.Quantity)
                     }
                 }
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ISBN">Purchase</a> |
+                <form asp-action="purchase" asp-route-id="@item.ISBN" asp-route-currentOrder="@ViewBag.CurrentOrder">
+                    <Button type="submit">One Click Buy</Button>
+                </form>
             </td>
         </tr>
 }

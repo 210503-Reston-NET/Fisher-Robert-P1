@@ -37,13 +37,13 @@ namespace StoreDL
             .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<Inventory>()
-                .HasKey(inventory => inventory.ISBN);
+                .HasKey(inventory => new { inventory.ISBN, inventory.StoreID });
             modelBuilder.Entity<Order>()
                 .HasKey(order => order.OrderNumber);
             modelBuilder.Entity<Product>()
                 .HasKey(product => product.ISBN);
             modelBuilder.Entity<Transaction>()
-                .HasKey(transact => transact.OrderNumber);
+                .HasKey(transact => new { transact.OrderNumber, transact.ISBN });
             modelBuilder.Entity<User>()
                 .HasKey(user => user.UserName);
         }

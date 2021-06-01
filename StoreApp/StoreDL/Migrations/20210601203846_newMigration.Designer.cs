@@ -10,8 +10,8 @@ using StoreDL;
 namespace StoreDL.Migrations
 {
     [DbContext(typeof(BearlyCampingDataContext))]
-    [Migration("20210520182632_initial")]
-    partial class initial
+    [Migration("20210601203846_newMigration")]
+    partial class newMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,13 +26,13 @@ namespace StoreDL.Migrations
                     b.Property<string>("ISBN")
                         .HasColumnType("text");
 
-                    b.Property<int?>("Quantity")
-                        .HasColumnType("integer");
-
                     b.Property<int>("StoreID")
                         .HasColumnType("integer");
 
-                    b.HasKey("ISBN");
+                    b.Property<int?>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ISBN", "StoreID");
 
                     b.HasIndex("StoreID");
 
@@ -100,9 +100,7 @@ namespace StoreDL.Migrations
             modelBuilder.Entity("StoreModels.Transaction", b =>
                 {
                     b.Property<int>("OrderNumber")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
 
                     b.Property<string>("ISBN")
                         .HasColumnType("text");
@@ -113,7 +111,7 @@ namespace StoreDL.Migrations
                     b.Property<int?>("Quantity")
                         .HasColumnType("integer");
 
-                    b.HasKey("OrderNumber");
+                    b.HasKey("OrderNumber", "ISBN");
 
                     b.HasIndex("OrderNumber1");
 

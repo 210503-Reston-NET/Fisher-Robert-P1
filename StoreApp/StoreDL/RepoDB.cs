@@ -18,7 +18,7 @@ namespace StoreDL
             // Initialize Serilogger
             Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
-            .WriteTo.File("../logs/StoreApp.txt", rollingInterval : RollingInterval.Day)
+            .WriteTo.File("../logs/StoreApp.txt", rollingInterval : RollingInterval.Infinite)
             .CreateLogger();
         }
 
@@ -467,6 +467,30 @@ namespace StoreDL
                 Log.Error(e.Message, "Failed to remove item ISBN: " + item.ISBN + " from store ID: " + item.StoreID);
                 return false;
             }
+        }
+
+        public Transaction GetTransaction(int ordernumber, string ISBN)
+        {
+            try
+            {
+                return _context.Transactions.FirstOrDefault(transact => transact.ISBN == ISBN && transact.OrderNumber == ordernumber);
+            } catch (Exception e)
+            {
+                Log.Error(e.Message, "Failed to get Transaction with Ordernumber: " + ordernumber + " And ISBN: " + ISBN);
+                return null;
+            }
+        }
+
+        public Transaction UpdateTransaction(Transaction transact)
+        {
+            _context.Transactions.Update(transact);
+            _context.SaveChanges();
+            return transact;
+        }
+
+        public Order GetOrder(int OrderNumber)
+        {
+            return _context.Orders.FirstOrDefault(order => order.OrderNumber == OrderNumber);
         }
     }
 }

@@ -10,8 +10,10 @@ namespace StoreWebUI.Models
     public class TransactionVM
     {
         [Required]
+        [Key]
         public int OrderNumber { get; set; }
         [Required]
+        [Key]
         public string ISBN { get; set; }
         [Required]
         public int? Quantity { get; set; }

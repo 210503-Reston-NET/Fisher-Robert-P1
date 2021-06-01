@@ -1,19 +1,19 @@
-﻿@model IEnumerable<StoreWebUI.Models.InventoryVM>
+﻿@model IEnumerable<StoreModels.Transaction>
 
 @{
-    ViewData["Title"] = "Inventory";
+    ViewData["Title"] = "ShoppingCart";
 }
 
-<h1>Store</h1>
+<h1>ShoppingCart</h1>
 
 <p>
-    <a asp-action="Create" asp-controller="Inventory">Add New Item</a>
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ISBN)
+                ISBN
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Quantity)
@@ -31,8 +31,9 @@
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                @Html.ActionLink("Adjust Quantity", "Edit", new { id = item.StoreID, ISBN = item.ISBN })  |
-                @Html.ActionLink("Remove", "Delete", new { id = item.StoreID,ISBN = item.ISBN }) |
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }

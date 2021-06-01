@@ -155,5 +155,20 @@ namespace StoreBL
         {
             return _repoDB.RemoveInventoryItem(item);
         }
+
+        public Transaction GetTransaction(int ordernumber, string ISBN)
+        {
+            return _repoDB.GetTransaction(ordernumber, ISBN);
+        }
+
+        public Transaction UpdateTransaction(Transaction trasnact)
+        {
+            return _repoDB.UpdateTransaction(trasnact);
+        }
+
+        public Order GetOrder(int OrderNumber)
+        {
+            return _repoDB.GetOrder(OrderNumber);
+        }
     }
 }

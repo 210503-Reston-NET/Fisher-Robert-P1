@@ -34,5 +34,8 @@ namespace StoreDL
         bool RemoveStore(Store store);
         bool AddInventoryItem(Inventory item);
         bool RemoveInventoryItem(Inventory item);
+        Transaction GetTransaction(int ordernumber, string ISBN);
+        Transaction UpdateTransaction(Transaction transact);
+        Order GetOrder(int OrderNumber);
     }
 }
