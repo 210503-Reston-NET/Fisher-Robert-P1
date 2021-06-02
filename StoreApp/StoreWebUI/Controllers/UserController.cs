@@ -21,7 +21,7 @@ namespace StoreWebUI.Controllers
         // GET: UserController
         public ActionResult Index()
         {
-            return View();
+            return View(_BL.GetAllUsers());
         }
 
         // GET: UserController/Create

@@ -492,5 +492,54 @@ namespace StoreDL
         {
             return _context.Orders.FirstOrDefault(order => order.OrderNumber == OrderNumber);
         }
+
+        public List<Order> GetAllOrders()
+        {
+            return _context.Orders.Select(order => order).ToList();
+        }
+
+        public List<Transaction> GetAllTransactions()
+        {
+            return _context.Transactions.Select(transact => transact).ToList();
+        }
+
+        public Order UpdateOrder(Order order)
+        {
+            _context.Update(order);
+            _context.SaveChanges();
+            return order;
+        }
+
+        public List<Order> OrderedListofOrders(string order, string by)
+        {
+            switch(order)
+            {
+                case "Price":
+                    switch(by)
+                    {
+                        case "asc":
+                            return _context.Orders.Select(order => order).OrderBy(x => x.Total).ToList();
+                        case "des":
+                            return _context.Orders.Select(order => order).OrderByDescending(x => x.Total).ToList();
+                        default:
+                            break;
+                    }
+                    break;
+                case "Date":
+                    switch (by)
+                    {
+                        case "asc":
+                            return _context.Orders.Select(order => order).OrderBy(x => x.Create).ToList();
+                        case "des":
+                            return _context.Orders.Select(order => order).OrderByDescending(x => x.Create).ToList();
+                        default:
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return _context.Orders.Select(order => order).OrderBy(x => x.Total).ToList();
+        }
     }
 }

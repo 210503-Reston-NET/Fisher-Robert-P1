@@ -1,0 +1,53 @@
+﻿@model IEnumerable<StoreModels.Order>
+
+@{
+    ViewData["Title"] = "CustomerOrders";
+}
+
+<h1>CustomerOrders</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Create)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Create)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.OrderNumber">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.OrderNumber">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.OrderNumber">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -28,14 +28,9 @@
                                 <div class="dropdown-content nav-link">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Products</a>
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Store" asp-action="Index">Stores</a>
-                                    <div class="dropdown">
-                                        <button class="dropbtn">Manager Menu</button>
-                                        <div class="dropdown-content nav-link">
-                                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Products</a>
-                                            <a class="nav-link text-dark" asp-area="" asp-controller="Store" asp-action="Index">Stores</a>
-                                            <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="View">Stores</a>
-                                        </div>
-                                    </div>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="ViewOrders">View Orders</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">View Customers</a>
+                                </div>
                                 </div>
                             </div>
                         </li>

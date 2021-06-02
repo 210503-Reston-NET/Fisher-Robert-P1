@@ -34,5 +34,9 @@ namespace StoreBL
         Transaction GetTransaction(int ordernumber, string ISBN);
         Transaction UpdateTransaction(Transaction trasnact);
         Order GetOrder(int OrderNumber);
+        List<Order> GetAllOrders();
+        List<Transaction> GetAllTransactions();
+        Order UpdateOrder(Order order);
+        List<Order> OrderedListofOrders(string order, string by);
     }
 }

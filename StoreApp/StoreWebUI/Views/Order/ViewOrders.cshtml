@@ -1,0 +1,58 @@
+﻿@model IEnumerable<StoreModels.Order>
+
+@{
+    ViewData["Title"] = "ViewOrders";
+}
+
+<h1>ViewOrders</h1>
+
+    <label>Order by Price</label>
+    <span><a class="btn text-dark" asp-area="" asp-controller="Order" asp-action="ViewOrders" asp-route-order="asc" asp-route-by="Price">^</a></span>
+    <span><a class="btn text-dark" asp-area="" asp-controller="Order" asp-action="ViewOrders" asp-route-order="des" asp-route-by="Price">v</a></span>
+
+    <label>Order by Date</label>
+    <span><a class="button text-dark"  asp-area="" asp-controller="Order" asp-action="ViewOrders" asp-route-order="asc" asp-route-by="Date">^</a></span>
+    <span><a class="btn-outline-info text-dark"  asp-area="" asp-controller="Order" asp-action="ViewOrders" asp-route-order="des" asp-route-by="Date">v</a></span>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Create)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StoreID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Create)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+                <td>
+                    <a asp-action="ViewTransactions" asp-route-orderNumber="@item.OrderNumber">View Related Transactions</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

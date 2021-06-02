@@ -1,6 +1,6 @@
 using StoreDL;
 using Models = StoreModels;
-using Entity = StoreDL.Entities;
+using Entity = StoreDL;
 using Xunit;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -11,6 +11,7 @@ namespace StoreTest
 {
     public class RepoTest
     {
+        /*
         private readonly DbContextOptions<Entity.BearlyCampingDataContext> options;
         public DbContextOptions<StoreDL.Entities.BearlyCampingDataContext> Options => options;
         public RepoTest()
@@ -307,6 +308,6 @@ namespace StoreTest
                 );
                 context.SaveChanges();
             }
-        }
+        }*/
     }
 }

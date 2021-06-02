@@ -1,0 +1,56 @@
+﻿@model IEnumerable<StoreModels.Transaction>
+@using StoreModels
+
+@{
+    ViewData["Title"] = "ViewTransactions";
+}
+
+<h1>ViewTransactions</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ISBN)
+            </th>
+            <th>
+                Product
+            </th>
+            <th>
+                Price
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+
+                @foreach(Product product in ViewBag.Products)
+                    if(product.ISBN == item.ISBN)
+                    {
+                        <td>
+                            @product.Name
+                        </td>
+                        <td>
+                            @product.Price
+                        </td>
+                        break;
+                    }
+
+        </tr>
+}
+    </tbody>
+</table>

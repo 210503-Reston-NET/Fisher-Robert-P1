@@ -170,5 +170,25 @@ namespace StoreBL
         {
             return _repoDB.GetOrder(OrderNumber);
         }
+
+        public List<Order> GetAllOrders()
+        {
+            return _repoDB.GetAllOrders();
+        }
+
+        public List<Transaction> GetAllTransactions()
+        {
+            return _repoDB.GetAllTransactions();
+        }
+
+        public Order UpdateOrder(Order order)
+        {
+            return _repoDB.UpdateOrder(order);
+        }
+
+        public List<Order> OrderedListofOrders(string order, string by)
+        {
+            return _repoDB.OrderedListofOrders(order, by);
+        }
     }
 }
