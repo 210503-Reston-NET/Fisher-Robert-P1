@@ -16,11 +16,9 @@ namespace StoreWebUI.Controllers
     {
      
         private StoreBLInterface _storeBL;
-        private readonly ILogger<HomeController> _logger;
         public InventoryController(ILogger<HomeController> logger, StoreBLInterface storeBL)
         {
             this._storeBL = storeBL;
-            _logger = logger;
         }
         
         // GET: StoreController/5
