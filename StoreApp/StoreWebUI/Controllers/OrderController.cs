@@ -98,13 +98,8 @@ namespace StoreWebUI.Controllers
                 else
                     Console.WriteLine("You have exceeded the maximum purchase limit.");
 
-                // Update Inventory
+                // Update Transactions
                 _BL.UpdateTransaction(updatableTransact);
-
-                // Update Inventory 
-                Inventory inv = _BL.GetInventory(int.Parse(HttpContext.Session.GetString("StoreID")), Isbn);
-                inv.Quantity--;
-                _BL.UpdateInventory(inv);
             }
 
 
@@ -122,6 +117,10 @@ namespace StoreWebUI.Controllers
                 {
                     Log.Error(e.Message, "Failed to add new Transaction while purchasing");
                 }
+            // Update Inventory 
+            Inventory inv = _BL.GetInventory(int.Parse(HttpContext.Session.GetString("StoreID")), Isbn);
+            inv.Quantity--;
+            _BL.UpdateInventory(inv);
 
             // Update Order Total
             Order current = _BL.GetOrder(int.Parse(HttpContext.Session.GetString("OrderNumber")));
@@ -144,6 +143,17 @@ namespace StoreWebUI.Controllers
             ViewBag.Transactions = _BL.GetAllTransactions();
 
             return View(_BL.OrderedListofOrders(by, order));
+        }
+
+        public ActionResult CustomerOrders(string order, string by, string id)
+        {
+            ViewBag.Stores = _BL.GetAllStores();
+            ViewBag.Products = _BL.GetAllProducts();
+            ViewBag.Transactions = _BL.GetAllTransactions();
+
+            Log.Information("Attempting to pull Orders for Customer: " + id);
+
+            return View(_BL.OrderedListofOrders(by, order, id));
         }
 
         public ActionResult ViewTransactions(int orderNumber)

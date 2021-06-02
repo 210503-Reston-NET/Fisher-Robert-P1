@@ -31,15 +31,18 @@ namespace StoreWebUI
                 .Enrich.FromLogContext()
                 .Enrich.WithMachineName()
                 .CreateLogger();
-            Log.Information("Initial build starting");
+            Log.Information("Starting Up");
             CreateHostBuilder(args).Build().Run();
+            Log.Information("Stopping");
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseStartup<Startup>()
+                    .UseConfiguration(Config)
+                    .UseSerilog();
                 });
     }
 }

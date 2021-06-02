@@ -155,7 +155,7 @@ namespace StoreBL
         {
             return _repoDB.RemoveInventoryItem(item);
         }
-
+        
         public Transaction GetTransaction(int ordernumber, string ISBN)
         {
             return _repoDB.GetTransaction(ordernumber, ISBN);
@@ -189,6 +189,11 @@ namespace StoreBL
         public List<Order> OrderedListofOrders(string order, string by)
         {
             return _repoDB.OrderedListofOrders(order, by);
+        }
+
+        public List<Order> OrderedListofOrders(string order, string by, string UserName)
+        {
+            return _repoDB.OrderedListofOrders(order, by, UserName);
         }
     }
 }

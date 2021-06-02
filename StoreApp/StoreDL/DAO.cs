@@ -41,5 +41,6 @@ namespace StoreDL
         List<Transaction> GetAllTransactions();
         Order UpdateOrder(Order order);
         List<Order> OrderedListofOrders(string order, string by);
+        List<Order> OrderedListofOrders(string order, string by, string UserName);
     }
 }

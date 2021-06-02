@@ -30,9 +30,7 @@
                 @Html.DisplayFor(modelItem => item.Password)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.UserName })  |
-                <a asp-action="Details" asp-route-id="@item.UserName">Details</a> |
-                @Html.ActionLink("Delete", "Delete", new { id = item.UserName }) |
+                <a asp-action="CustomerOrders" asp-controller="Order" asp-route-id="@item.UserName" asp-route-order="Price" asp-route-by="asc">Related Orders</a> 
             </td>
         </tr>
 }

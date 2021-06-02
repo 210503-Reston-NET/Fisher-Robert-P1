@@ -541,5 +541,17 @@ namespace StoreDL
             }
             return _context.Orders.Select(order => order).OrderBy(x => x.Total).ToList();
         }
+
+        public List<Order> OrderedListofOrders(string order, string by, string UserName)
+        {
+            List<Order> allOrders = OrderedListofOrders(order, by);
+            List<Order> tempOrders = new List<Order>();
+
+            foreach (Order item in allOrders)
+                if (item.UserName == UserName)
+                    tempOrders.Add(item);
+
+            return tempOrders;
+        }
     }
 }

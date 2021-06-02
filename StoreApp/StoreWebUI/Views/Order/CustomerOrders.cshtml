@@ -6,9 +6,17 @@
 
 <h1>CustomerOrders</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1>ViewOrders</h1>
+
+<label>Order by Price</label>
+<span><a class="button text-dark" asp-area="" asp-controller="Order" asp-action="CustomerOrders" asp-route-order="asc" asp-route-by="Price">^</a></span>
+<span><a class="button text-dark" asp-area="" asp-controller="Order" asp-action="CustomerOrders" asp-route-order="des" asp-route-by="Price">v</a></span>
+
+<label>Order by Date</label>
+<span><a class="button text-dark" asp-area="" asp-controller="Order" asp-action="CustomerOrders" asp-route-order="asc" asp-route-by="Date">^</a></span>
+<span><a class="button text-dark" asp-area="" asp-controller="Order" asp-action="CustomerOrders" asp-route-order="des" asp-route-by="Date">v</a></span>
+
+
 <table class="table">
     <thead>
         <tr>
@@ -28,26 +36,26 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StoreID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Create)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Total)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.OrderNumber">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.OrderNumber">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.OrderNumber">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StoreID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Create)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+                <td>
+                    <a asp-action="ViewTransactions" asp-route-orderNumber="@item.OrderNumber">View Related Transactions</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
