@@ -8,6 +8,7 @@ using StoreBL;
 using StoreWebUI.Models;
 using StoreModels;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace StoreWebUI.Controllers
 {
@@ -21,6 +22,7 @@ namespace StoreWebUI.Controllers
             this._storeBL = storeBL;
             _logger = logger;
         }
+        
         // GET: StoreController/5
         public ActionResult Index(int id)
         {
@@ -31,6 +33,7 @@ namespace StoreWebUI.Controllers
                 return View(_storeBL.GetInventoryFor(id)
                     .Select(inventory => new InventoryVM(inventory))
                     .ToList());
+                Log.Information("Session StoreID changed to: " + id);
             }
             // Otherwise use previous StoreID
             return View(_storeBL.GetInventoryFor(int.Parse(HttpContext.Session.GetString("StoreID")))
@@ -69,7 +72,7 @@ namespace StoreWebUI.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError("Failed to create Inventory\n" + e.Message);
+                Log.Error("Failed to create Inventory\n" + e.Message);
                 return View();
             }
         }
@@ -87,6 +90,7 @@ namespace StoreWebUI.Controllers
         {
             try
             {
+                Log.Information("Attempting to add new item to Inventory");
                 Inventory result = new Inventory()
                 {
                     ISBN = inventoryVM.ISBN,
@@ -96,8 +100,9 @@ namespace StoreWebUI.Controllers
                 _storeBL.UpdateInventory(result);
                 return Redirect("/Inventory/Index/" + HttpContext.Session.GetString("StoreID"));
             }
-            catch
+            catch (Exception e)
             {
+                Log.Error(e.Message, "Failed to update inventory");
                 return View();
             }
         }
@@ -123,8 +128,9 @@ namespace StoreWebUI.Controllers
                 });
                 return Redirect("Inventory/Index/" + HttpContext.Session.GetString("StoreID"));
             }
-            catch
+            catch (Exception e)
             {
+                Log.Error(e.Message, "Failed to remove store with ID: " + storeVM.StoreID);
                 return View();
             }
         }

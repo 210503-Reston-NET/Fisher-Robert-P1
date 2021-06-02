@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using StoreBL;
+using Serilog;
 using StoreWebUI.Models;
 using StoreModels;
 
@@ -57,8 +58,9 @@ namespace StoreWebUI.Controllers
                     }
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
+                Log.Error(e.Message, "Failed to add Product to database");
                 return View();
             }
         }

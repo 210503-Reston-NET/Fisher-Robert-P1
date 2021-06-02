@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using StoreBL;
 using StoreWebUI.Models;
 using StoreModels;
+using Serilog;
 
 namespace StoreWebUI.Controllers
 {
@@ -58,8 +59,9 @@ namespace StoreWebUI.Controllers
                     }
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
+                Log.Error(e.Message, "Failed to create new store into database");
                 return View();
             }
         }
@@ -85,8 +87,9 @@ namespace StoreWebUI.Controllers
                 });
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
+                Log.Error(e.Message, "Failed to update store with new information");
                 return View();
             }
         }
@@ -113,8 +116,9 @@ namespace StoreWebUI.Controllers
                 });
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception E)
             {
+                Log.Error(E.Message, "Failed to Remove Store from database");
                 return View();
             }
         }

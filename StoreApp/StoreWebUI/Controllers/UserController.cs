@@ -4,6 +4,7 @@ using StoreWebUI.Models;
 using StoreModels;
 using StoreBL;
 using System;
+using Serilog;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -45,8 +46,9 @@ namespace StoreWebUI.Controllers
                 _BL.AddUser(user);
                 return Redirect("../Home/Index");
             }
-            catch
+            catch (Exception e)
             {
+                Log.Error(e.Message, "Failed to create new user");
                 return View();
             }   
         }
@@ -111,6 +113,7 @@ namespace StoreWebUI.Controllers
             {
                 if (user.UserName == given.UserName && user.Password == given.Password)
                 {
+                    Log.Information("Set Session UserName to: " + user.UserName + "-- And EmployeeID to: " + user.Code);
                     HttpContext.Session.SetString("EmployeeID", JsonConvert.SerializeObject(user.Code));
                     HttpContext.Session.SetString("UserName", JsonConvert.SerializeObject(user.UserName));
                     return Redirect("../Order/Index");
